@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import AddItem from './AddItem';
 import ItemsList from './ItemsList';
+import DeleteItem from './DeleteItem';
 
 class App extends React.Component {
   state = {
@@ -13,7 +14,7 @@ class App extends React.Component {
     this.setState(prevState => ({ items: [...prevState.items, item] }));
   };
 
-  deleteLastItem = event => {
+  handleDeleteLastItem = event => {
     this.setState(prevState => ({ items: this.state.items.slice(0, -1) }));
   };
 
@@ -31,9 +32,10 @@ class App extends React.Component {
         <h2>Shopping List</h2>
         <AddItem onAddItem={this.handleAddItem} />
 
-        <button onClick={this.deleteLastItem} disabled={this.noItemsFound()}>
-          Delete Last Item
-        </button>
+        <DeleteItem
+          onDeleteLastItem={this.handleDeleteLastItem}
+          buttonDisabled={this.noItemsFound()}
+        />
 
         <ItemsList items={this.state.items}/>
       </div>
